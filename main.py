@@ -1,5 +1,6 @@
 import pygame as pg
 from enemy import Enemy
+from player import Player
 from settings import *
 
 pg.init()
@@ -9,17 +10,9 @@ screen = pg.display.set_mode((screen_width, screen_height))
 pg.display.set_caption("Space Invaders")
 pg.display.set_icon(pg.image.load("images/ufo.png")) # image.load liefert eine surface zurück
 
-#bilder laden und im Fenster anzeigen
-#spieler
-def player(x, y):
-    player_img = pg.image.load("images/player.png")
-    screen.blit(player_img, (player_x, player_y)) #player an der Position 200,300 hinzufügen
 
-#enemy
-# def enemy(x = enemy_x, y = enemy_y): #standardwerte
-#     enemy_img = pg.image.load("images/enemy.png")
-#     screen.blit(enemy_img, (enemy_x, enemy_y))
 enemy = Enemy(screen, pg.image.load("images/enemy.png"))
+player = Player(screen, pg.image.load("images/player.png"))
 
 #Game loop
 running = True
@@ -36,20 +29,15 @@ while running:
                 player_direction = 0.1
         if event.type == pg.KEYUP:
                 player_direction = 0
-    #player movement
-    player_x += player_direction
-    if player_x <= 0:
-        player_x = 0
-    if player_x >= screen_height - 64: 
-        player_x = screen_height - 64
+    
+    player.move(player_direction)
+    player.draw()
 
     #automatic enemy movement
     enemy.move()
     enemy.draw()
 
-        
-
-    player(player_x, player_y)
+    
     pg.display.flip()
 
 pg.quit()
