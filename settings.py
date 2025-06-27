@@ -14,4 +14,6 @@ enemy_x = 0
 enemy_y = 0
 enemy_dx = 1
 enemy_dy = 1
-#enemy_delta = 0.5
+
+#bullet
+bullet_speed = 0.5

@@ -1,6 +1,7 @@
 import pygame as pg
 from enemy import Enemy
 from player import Player
+from bullet import Bullet
 from settings import *
 
 pg.init()
@@ -13,12 +14,14 @@ pg.display.set_icon(pg.image.load("images/ufo.png")) # image.load liefert eine s
 
 enemy = Enemy(screen, pg.image.load("images/enemy.png"))
 player = Player(screen, pg.image.load("images/player.png"))
+bullet = Bullet(screen, pg.image.load("images/bullet.png"), player.x)
 
 #Game loop
 running = True
 while running:
     screen.fill((179, 238, 187))
     
+
     for event in pg.event.get():
         if event.type == pg.QUIT:
             running = False
@@ -27,6 +30,10 @@ while running:
                 player_direction = -0.1
             if event.key == pg.K_RIGHT:
                 player_direction = 0.1
+            if event.key == pg.K_SPACE:
+                bullet.shoot()
+                print(bullet.state)
+                 
         if event.type == pg.KEYUP:
                 player_direction = 0
     
@@ -37,6 +44,10 @@ while running:
     enemy.move()
     enemy.draw()
 
+    if bullet.state == "fire":
+        bullet.draw()
+    if bullet.y <= 0:
+        bullet.load(player.x + 16)
     
     pg.display.flip()
 
