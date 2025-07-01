@@ -31,13 +31,19 @@ while running:
             if event.key == pg.K_RIGHT:
                 player_direction = 0.1
             if event.key == pg.K_SPACE:
-                bullet.shoot()
-                print(bullet.state)
+                if bullet.state == "ready":
+                    bullet.x = player.x
+                    bullet.shoot()
                  
         if event.type == pg.KEYUP:
                 player.state = "ready"
                 player_direction = 0
     
+    if bullet.state == "fire":
+        bullet.draw()
+    if bullet.y <= 0:
+        bullet.load(player.x, player.y)
+
     player.move(player_direction)
     player.draw()
 
@@ -45,10 +51,7 @@ while running:
     enemy.move()
     enemy.draw()
 
-    if bullet.state == "fire":
-        bullet.draw()
-    if bullet.y <= 0:
-        bullet.load(player.x + 16, player.y + 10)
+    
     
     pg.display.flip()
 
