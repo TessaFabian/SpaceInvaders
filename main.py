@@ -35,6 +35,7 @@ while running:
                 print(bullet.state)
                  
         if event.type == pg.KEYUP:
+                player.state = "ready"
                 player_direction = 0
     
     player.move(player_direction)
@@ -47,7 +48,7 @@ while running:
     if bullet.state == "fire":
         bullet.draw()
     if bullet.y <= 0:
-        bullet.load(player.x + 16)
+        bullet.load(player.x + 16, player.y + 10)
     
     pg.display.flip()
 

@@ -6,14 +6,16 @@ class Player:
         self.y = y
         self.screen = screen
         self.img = img
+        self.state = "ready"
 
 
     def move(self, direction):
+        self.state = "move"
         self.x += direction
         if self.x <= 0:
             self.x = 0
-        if self.x >= screen_height - 64:
-            self.x = screen_height - 64
+        if self.x >= screen_width - 64:
+            self.x = screen_width - 64
 
     def draw(self):
         self.screen.blit(self.img, (self.x, self.y))

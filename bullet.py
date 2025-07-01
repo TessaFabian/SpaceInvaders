@@ -18,7 +18,7 @@ class Bullet:
         self.y -= bullet_speed
         self.screen.blit(self.img, (self.x, self.y))
     
-    def load(self, x):
+    def load(self, x, y):
         self.state = "ready"
-        self.y = player_y + 10
+        self.y = y
         self.x = x
