@@ -18,7 +18,7 @@ class Player:
         if self.x >= screen_width - 64:
             self.x = screen_width - 64
 
-    def increase_sore(self):
+    def increase_score(self):
         self.score += 10
         print(self.score)
 

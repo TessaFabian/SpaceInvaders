@@ -44,10 +44,12 @@ while running:
     
     if bullet.check_Collision(enemy.x, enemy.y, bullet.x, bullet.y):
         bullet.load(player.x, player.y)
+        print("Treffer")
         #score erhöhen
-        # player.score()
-        #enemy zurücksetzen
+        player.increase_score()
+        #enemy ausblenden --> wird nur gezeichnet, wenn keine Kollision erfolgt ist
         enemy.reset()
+
 
 
     if bullet.y <= 0:
