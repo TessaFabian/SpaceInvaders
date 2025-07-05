@@ -1,10 +1,12 @@
 from settings import *
-
+import random
 
 class Enemy:
     def __init__(self, screen, img):
-        self.x = 0
-        self.y = 0
+        #self.x = 0
+        self.x = random.randint(0, 1000)
+        #self.y = 0
+        self.y = random.randint(50, 300)
         self.dx = 0.5
         self.dy = 1
         self.screen = screen
@@ -33,3 +35,5 @@ class Enemy:
 
     def draw(self):
         self.screen.blit(self.img, (self.x, self.y))
+
+

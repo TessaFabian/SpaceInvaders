@@ -12,9 +12,18 @@ pg.display.set_caption("Space Invaders")
 pg.display.set_icon(pg.image.load("images/ufo.png")) # image.load liefert eine surface zurück
 
 
-enemy = Enemy(screen, pg.image.load("images/enemy.png"))
+#enemy = Enemy(screen, pg.image.load("images/enemy.png"))
 player = Player(screen, pg.image.load("images/player.png"))
 bullet = Bullet(screen, pg.image.load("images/bullet.png"), player.x)
+
+
+enemy_list = []
+number_of_enemies = 4
+for i in range(0, number_of_enemies):
+    enemy = Enemy(screen, pg.image.load("images/enemy.png"))
+    enemy_list.append(enemy)
+
+
 
 #Game loop
 running = True
@@ -42,13 +51,22 @@ while running:
     if bullet.state == "fire":
         bullet.draw()
     
-    if bullet.check_Collision(enemy.x, enemy.y, bullet.x, bullet.y):
-        bullet.load(player.x, player.y)
-        print("Treffer")
-        #score erhöhen
-        player.increase_score()
-        #enemy ausblenden --> wird nur gezeichnet, wenn keine Kollision erfolgt ist
-        enemy.reset()
+    for enemy in enemy_list:
+        if bullet.check_Collision(enemy.x, enemy.y, bullet.x, bullet.y):
+            bullet.load(player.x, player.y)
+            print("Treffer")
+            #score erhöhen
+            player.increase_score()
+            #enemy ausblenden --> wird nur gezeichnet, wenn keine Kollision erfolgt ist
+            enemy_list.remove(enemy)
+        else:
+            enemy.move()
+            enemy.draw()
+
+        if enemy.y > player.y:
+            print("Game over")
+            running = False 
+
 
 
 
@@ -59,8 +77,9 @@ while running:
     player.draw()
 
     #automatic enemy movement
-    enemy.move()
-    enemy.draw()
+    #for enemy in enemy_list:
+    #    enemy.move()
+    #    enemy.draw()
 
     
     
