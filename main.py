@@ -41,6 +41,15 @@ while running:
     
     if bullet.state == "fire":
         bullet.draw()
+    
+    if bullet.check_Collision(enemy.x, enemy.y, bullet.x, bullet.y):
+        bullet.load(player.x, player.y)
+        #score erhöhen
+        # player.score()
+        #enemy zurücksetzen
+        enemy.reset()
+
+
     if bullet.y <= 0:
         bullet.load(player.x, player.y)
 

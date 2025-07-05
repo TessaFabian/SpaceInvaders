@@ -7,6 +7,7 @@ class Player:
         self.screen = screen
         self.img = img
         self.state = "ready"
+        self.score = 0
 
 
     def move(self, direction):
@@ -16,6 +17,10 @@ class Player:
             self.x = 0
         if self.x >= screen_width - 64:
             self.x = screen_width - 64
+
+    def increase_sore(self):
+        self.score += 10
+        print(self.score)
 
     def draw(self):
         self.screen.blit(self.img, (self.x, self.y))

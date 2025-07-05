@@ -1,4 +1,5 @@
 from settings import *
+from math import sqrt, pow
 
 
 class Bullet:
@@ -22,3 +23,12 @@ class Bullet:
         self.state = "ready"
         self.y = y
         self.x = x
+
+    def check_Collision(self, en_x, en_y, bull_x, bull_y):
+        #euklidische distanz
+        distance = sqrt(pow(en_x - bull_x, 2) + pow(en_y - bull_y, 2))
+        if distance < 27:
+            return True
+        else: 
+            return False
+
